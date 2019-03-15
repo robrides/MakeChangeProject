@@ -17,7 +17,12 @@ public class MakeChangeProgram {
 		System.out.print("Enter the amount of money you are tendering >> ");
 		double amountTendered = kb.nextDouble();
 
+//		User Story #3
+//		Display an appropriate message if the customer provided too little money or the exact amount.
 		
+		if (amountTendered < productPrice ) {
+			System.out.println("Sorry, you've not provided enough to cover the cost of your item.\nTerminating program.");
+		}
 	}
 
 }
