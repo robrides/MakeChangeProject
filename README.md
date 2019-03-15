@@ -4,8 +4,6 @@
 
 ### Overview
 
-TODO: Project description, with instructions how to run it.
-
 ### Technologies Used
 
 ### Lessons Learned, Insights Gained
