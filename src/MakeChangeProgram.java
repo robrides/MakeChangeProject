@@ -23,32 +23,54 @@ public class MakeChangeProgram {
 
 		System.out.print("Welcome to the Make Change Program!\nEnter the price of your item >> ");
 		float productPrice = kb.nextFloat();
+
+
 		if (productPrice >= 20) {
 			System.out.println("Sorry, this program does not calculate items costing $20.00 or more.\nTerminating Program.");
 		}
-
+		
+		// if (productPrice < 20 && productPrice )
+		
 //		User Story #2
-//		The user is then prompted asking how much money was tendered by the customer.
-
-		System.out.print("Enter the amount of money you are tendering >> ");
-		float amountTendered = kb.nextFloat();
+//		The user is then prompted asking how much money was tendered by the customer.	
+		float amountTendered = 0;
+		
+		if (productPrice < 20) {
+			System.out.print("Enter the amount of money you are tendering >> ");
+			amountTendered = kb.nextFloat();
+		}
 
 //		User Story #3
 //		Display an appropriate message if the customer provided too little money or the exact amount.
+		
 		float change = amountTendered - productPrice;
-
-		if (amountTendered < productPrice) {
-			System.out.println("Sorry, you've not provided enough to cover the cost of your item.\nTerminating program.");
-		} else if (amountTendered == productPrice) {
-			System.out.println("You've entered the exact amount. Thank you for using the Make Change Program.");
-		} else if (amountTendered < 0) {
-			System.out.println("You've entered an invalide tender ammount.\nTerminating Program.");
+		
+		if (productPrice < 20) {
+			if (amountTendered <= 0) {
+				System.out.println("You've entered an invalide tender ammount.\nTerminating Program.");
+			} 
+			else if (amountTendered < productPrice && amountTendered < 20) {
+				System.out.println("Sorry, you've not provided enough to cover the cost of your item.\nTerminating program.");
+			}  
+			else if (amountTendered == productPrice && amountTendered < 20) {
+				System.out.println("You've entered the exact amount. Thank you for using the Make Change Program.");
+			}
 		}
-
+		
 //		User Story #4
 //		If the amount tendered is more than the cost of the item, display the number of bills and 
 //		coins that should be given to the customer.
-// 		TODO: Fix change less than $1.00 - all cases 0.99 - .01
+
+		// Determine number of 10s to be returned; determine appropriate string output
+		if (change >= 20) {
+			int num20s = (int) change / 20;
+			if (num20s > 1) {
+				changeString = changeString + num20s + " twenty dollar bills";
+			} else {
+				changeString = changeString + num20s + " twenty dollar bill";
+			}
+			change = change - num20s * 20;
+		}
 
 		// Determine number of 10s to be returned; determine appropriate string output
 		if (change >= 10) {
@@ -182,8 +204,33 @@ public class MakeChangeProgram {
 				changeString = changeString + (int)numPen + " penny";
 			}
 		}
-		System.out.println(changeString + ".");
-
+		if (changeString != "") {
+			System.out.println(changeString + ".");
+		}
+		kb.close();
+	}
+// 		Review of requirements
+//		User Story #1
+//		The user is prompted asking for the price of the item.
+//		Complete
+//
+//		User Story #2
+//		The user is then prompted asking how much money was tendered by the customer.
+//		Complete
+//		
+//		User Story #3
+//		Display an appropriate message if the customer provided too little money or the exact amount.
+//		Complete
+//		
+//		User Story #4
+//		If the amount tendered is more than the cost of the item, display the number of bills and coins that should be given to the customer.
+//		Complete
+		
+	public static float getAmtTendered() {
+		Scanner kb = new Scanner(System.in);
+		System.out.print("Enter the amount of money you are tendering >> ");
+		float amountTendered = kb.nextFloat();
+		return amountTendered;
 	}
 
 }
