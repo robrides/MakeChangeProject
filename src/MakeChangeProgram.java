@@ -23,38 +23,37 @@ public class MakeChangeProgram {
 
 		System.out.print("Welcome to the Make Change Program!\nEnter the price of your item >> ");
 		float productPrice = kb.nextFloat();
-
-
-		if (productPrice >= 20) {
-			System.out.println("Sorry, this program does not calculate items costing $20.00 or more.\nTerminating Program.");
-		}
-		
-		// if (productPrice < 20 && productPrice )
 		
 //		User Story #2
 //		The user is then prompted asking how much money was tendered by the customer.	
-		float amountTendered = 0;
-		
-		if (productPrice < 20) {
-			System.out.print("Enter the amount of money you are tendering >> ");
-			amountTendered = kb.nextFloat();
-		}
+		float amountTendered = 0;		
+		float change = 0; 
 
 //		User Story #3
 //		Display an appropriate message if the customer provided too little money or the exact amount.
+		if (productPrice >= 20) {
+			System.out.println("Sorry, this program does not calculate items costing $20.00 or more.\nTerminating Program.");
+		}
+		else if (productPrice <= 0) {
+			System.out.println("You've entered an invalid tender ammount.\nTerminating Program.");
+		} 
+		// Check for hundredth's place
+		else if (productPrice - (int)productPrice > 0.09f) {
+			System.out.println("int of prodprice " + (productPrice - (int)productPrice));
+					System.out.println("You've entered an invalid tender amount.\nTerminating Program.");
+		} 
+		else if (productPrice > 0 && productPrice < 20 && productPrice - (int)productPrice < 0.09f) {		
+			System.out.print("Enter the amount of money you are tendering >> ");
+			amountTendered = kb.nextFloat();
+		}
 		
-		float change = amountTendered - productPrice;
+		change = amountTendered - productPrice;
 		
-		if (productPrice < 20) {
-			if (amountTendered <= 0) {
-				System.out.println("You've entered an invalide tender ammount.\nTerminating Program.");
-			} 
-			else if (amountTendered < productPrice && amountTendered < 20) {
-				System.out.println("Sorry, you've not provided enough to cover the cost of your item.\nTerminating program.");
-			}  
-			else if (amountTendered == productPrice && amountTendered < 20) {
+		if (amountTendered != 0 && amountTendered == productPrice) {
 				System.out.println("You've entered the exact amount. Thank you for using the Make Change Program.");
-			}
+		}
+		else if (amountTendered != 0 && amountTendered < productPrice) {
+			System.out.println("Sorry, you've not provided enough to cover the cost of your item.\nTerminating program.");
 		}
 		
 //		User Story #4
@@ -62,150 +61,158 @@ public class MakeChangeProgram {
 //		coins that should be given to the customer.
 
 		// Determine number of 10s to be returned; determine appropriate string output
-		if (change >= 20) {
-			int num20s = (int) change / 20;
-			if (num20s > 1) {
-				changeString = changeString + num20s + " twenty dollar bills";
-			} else {
-				changeString = changeString + num20s + " twenty dollar bill";
+		if (amountTendered > 0) {
+			if (change >= 20) {
+				int num20s = (int) change / 20;
+				if (num20s > 1) {
+					changeString = changeString + num20s + " twenty dollar bills";
+				} else {
+					changeString = changeString + num20s + " twenty dollar bill";
+				}
+				change = change - num20s * 20;
 			}
-			change = change - num20s * 20;
-		}
-
-		// Determine number of 10s to be returned; determine appropriate string output
-		if (change >= 10) {
-			int num10s = (int) change / 10;
-			if (num10s > 1) {
-				changeString = changeString + num10s + " ten dollar bills";
-			} else {
-				changeString = changeString + num10s + " ten dollar bill";
+	
+			// Determine number of 10s to be returned; determine appropriate string output
+			if (change >= 10) {
+				int num10s = (int) change / 10;
+				if (num10s > 1) {
+					if (changeString != "") {
+						changeString = changeString + ", ";
+					}
+					changeString = changeString + num10s + " ten dollar bills";
+				} else {
+					if (changeString != "") {
+						changeString = changeString + ", ";
+					}
+					changeString = changeString + num10s + " ten dollar bill";
+				}
+				change = change - num10s * 10;
 			}
-			change = change - num10s * 10;
-		}
-
-		// Determine number of 5s to be returned; determine appropriate string output
-		if (change >= 5) {
-			int num5s = (int) change / 5;
-			change = change - num5s * 5;
-			if (num5s > 1) {
-				if (changeString != "") {
-					changeString = changeString + ", ";
+	
+			// Determine number of 5s to be returned; determine appropriate string output
+			if (change >= 5) {
+				int num5s = (int) change / 5;
+				change = change - num5s * 5;
+				if (num5s > 1) {
+					if (changeString != "") {
+						changeString = changeString + ", ";
+					}
+					changeString = changeString + num5s + " five dollar bills";
+				} else {
+					if (changeString != "") {
+						changeString = changeString + ", ";
+					}
+					changeString = changeString + num5s + " five dollar bill";
 				}
-				changeString = changeString + num5s + " five dollar bills";
-			} else {
-				if (changeString != "") {
-					changeString = changeString + ", ";
-				}
-				changeString = changeString + num5s + " five dollar bill";
 			}
-		}
-
-		// Determine number of 1s to be returned; determine appropriate string output
-		if (change >= 1) {
-			int num1s = (int) change / 1;
-			change = change - num1s * 1;
-			if (num1s > 1) {
-				if (changeString != "") {
-					changeString = changeString + ", ";
+	
+			// Determine number of 1s to be returned; determine appropriate string output
+			if (change >= 1) {
+				int num1s = (int) change / 1;
+				change = change - num1s * 1;
+				if (num1s > 1) {
+					if (changeString != "") {
+						changeString = changeString + ", ";
+					}
+					changeString = changeString + num1s + " one dollar bills";
+				} else {
+					if (changeString != "") {
+						changeString = changeString + ", ";
+					}
+					changeString = changeString + num1s + " one dollar bill";
 				}
-				changeString = changeString + num1s + " one dollar bills";
-			} else {
-				if (changeString != "") {
-					changeString = changeString + ", ";
-				}
-				changeString = changeString + num1s + " one dollar bill";
 			}
-		}
-		// Determine number of 0.25s to be returned; determine appropriate string output
-		if (change > 0 && change >= 0.25f) {
-			float numQrts = change / 0.25f;
-			change = change - (int) numQrts * 0.25f;
-
-			// Round up if near the next denomination increment
-			if (change >= 0.245f || change >= 0.095f) {
-				numQrts += 0.001f;
-				change += 0.001f;
+			// Determine number of 0.25s to be returned; determine appropriate string output
+			if (change > 0 && change >= 0.25f) {
+				float numQrts = change / 0.25f;
+				change = change - (int) numQrts * 0.25f;
+	
+				// Round up if near the next denomination increment
+				if (change >= 0.245f || change >= 0.095f) {
+					numQrts += 0.001f;
+					change += 0.001f;
+				}
+				if ((int) numQrts > 1) {
+					if (changeString != "") {
+						changeString = changeString + ", ";
+					}
+					changeString = changeString + (int) numQrts + " quarters";
+				} else {
+					if (changeString != "") {
+						changeString = changeString + ", ";
+					}
+					changeString = changeString + (int) numQrts + " quarter";
+				}
 			}
-			if ((int) numQrts > 1) {
-				if (changeString != "") {
-					changeString = changeString + ", ";
+			// Determine number of 0.10s to be returned; determine appropriate string output
+			if (change > 0 && change >= 0.10f) {
+				float numDimes = change / 0.10f;
+				change = change - (int)numDimes * 0.10f;
+	
+				// Round up if near the next denomination increment
+				if (change >= 0.095f || change >= 0.045f) {
+					numDimes += 0.001f;
+					change += 0.001f;
 				}
-				changeString = changeString + (int) numQrts + " quarters";
-			} else {
-				if (changeString != "") {
-					changeString = changeString + ", ";
+				if ((int)numDimes > 1) {
+					if (changeString != "") {
+						changeString = changeString + ", ";
+					}
+					changeString = changeString + (int)numDimes + " dimes";
+				} else {
+					if (changeString != "") {
+						changeString = changeString + ", ";
+					}
+					changeString = changeString + (int)numDimes + " dime";
 				}
-				changeString = changeString + (int) numQrts + " quarter";
 			}
-		}
-		// Determine number of 0.10s to be returned; determine appropriate string output
-		if (change > 0 && change >= 0.10f) {
-			float numDimes = change / 0.10f;
-			change = change - (int)numDimes * 0.10f;
-
-			// Round up if near the next denomination increment
-			if (change >= 0.095f || change >= 0.045f) {
-				numDimes += 0.001f;
-				change += 0.001f;
+			// Determine number of 0.05s to be returned; determine appropriate string output
+			if (change > 0 && change >= 0.05f) {
+				float numNickels = change / 0.05f;
+				change = change - (int)numNickels * 0.05f;
+	
+				// Round up if near the next denomination increment
+				if (change >= 0.045f || change >= 0.005f) {
+					numNickels += 0.001f;
+					change += 0.001f;
+				}
+				if ((int)numNickels > 1) {
+					if (changeString != "") {
+						changeString = changeString + ", ";
+					}
+					changeString = changeString + (int)numNickels + " nickels";
+				} else {
+					if (changeString != "") {
+						changeString = changeString + ", ";
+					}
+					changeString = changeString + (int)numNickels + " nickel";
+				}
 			}
-			if ((int)numDimes > 1) {
-				if (changeString != "") {
-					changeString = changeString + ", ";
+			// Determine number of 0.01s to be returned; determine appropriate string output
+			if (change > 0.00f) {
+				float numPen = change / 0.01f;
+				change = change - (int)numPen * 0.01f;
+				
+				// Round up if near the next denomination increment
+				if (change >= 0.005f) {
+					numPen += 0.01f;
+					change += 0.01f;
+				} 
+				if ((int)numPen > 1) {
+					if (changeString != "") {
+						changeString = changeString + ", ";
+					}
+					changeString = changeString + (int)numPen + " pennies";
+				} else if ((int)numPen == 1) {
+					if (changeString != "") {
+						changeString = changeString + ", ";
+					}
+					changeString = changeString + (int)numPen + " penny";
 				}
-				changeString = changeString + (int)numDimes + " dimes";
-			} else {
-				if (changeString != "") {
-					changeString = changeString + ", ";
-				}
-				changeString = changeString + (int)numDimes + " dime";
 			}
-		}
-		// Determine number of 0.05s to be returned; determine appropriate string output
-		if (change > 0 && change >= 0.05f) {
-			float numNickels = change / 0.05f;
-			change = change - (int)numNickels * 0.05f;
-
-			// Round up if near the next denomination increment
-			if (change >= 0.045f || change >= 0.005f) {
-				numNickels += 0.001f;
-				change += 0.001f;
+			if (changeString != "") {
+				System.out.println(changeString + ".");
 			}
-			if ((int)numNickels > 1) {
-				if (changeString != "") {
-					changeString = changeString + ", ";
-				}
-				changeString = changeString + (int)numNickels + " nickels";
-			} else {
-				if (changeString != "") {
-					changeString = changeString + ", ";
-				}
-				changeString = changeString + (int)numNickels + " nickel";
-			}
-		}
-		// Determine number of 0.01s to be returned; determine appropriate string output
-		if (change > 0.00f) {
-			float numPen = change / 0.01f;
-			change = change - (int)numPen * 0.01f;
-			
-			// Round up if near the next denomination increment
-			if (change >= 0.005f) {
-				numPen += 0.01f;
-				change += 0.01f;
-			} 
-			if ((int)numPen > 1) {
-				if (changeString != "") {
-					changeString = changeString + ", ";
-				}
-				changeString = changeString + (int)numPen + " pennies";
-			} else if ((int)numPen == 1) {
-				if (changeString != "") {
-					changeString = changeString + ", ";
-				}
-				changeString = changeString + (int)numPen + " penny";
-			}
-		}
-		if (changeString != "") {
-			System.out.println(changeString + ".");
 		}
 		kb.close();
 	}
