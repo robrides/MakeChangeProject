@@ -10,9 +10,9 @@ public class MakeChangeProgram {
 //		to make the change for the customer. Change should be provided using the largest bill and 
 //		coin denominations as possible. Denominations that are not used should not be displayed.
 
-//	    Limits: 
-//		1. The item will never be over $20.00 
-//		2. The customer will never tender more than $20.00
+//	    Further Requirements and Constraints: 
+//		1. The item will never be over $20.00; "Amount: any amount less than 20.00"
+//		2. Tendered: anything greater than amount: correct denominations for correct change.
 
 		String changeString = "";
 
