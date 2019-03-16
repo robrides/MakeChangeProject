@@ -22,12 +22,12 @@ public class MakeChangeProgram {
 		Scanner kb = new Scanner(System.in);
 
 		System.out.print("Welcome to the Make Change Program!\nEnter the price of your item >> ");
-		float productPrice = kb.nextFloat();
+		double productPrice = kb.nextDouble();
 		
 //		User Story #2
 //		The user is then prompted asking how much money was tendered by the customer.	
-		float amountTendered = 0;		
-		float change = 0; 
+		double amountTendered = 0;		
+		double change = 0; 
 
 //		User Story #3
 //		Display an appropriate message if the customer provided too little money or the exact amount.
@@ -36,15 +36,10 @@ public class MakeChangeProgram {
 		}
 		else if (productPrice <= 0) {
 			System.out.println("You've entered an invalid tender ammount.\nTerminating Program.");
-		} 
-		// Check for hundredth's place
-		else if (productPrice - (int)productPrice > 0.09f) {
-			System.out.println("int of prodprice " + (productPrice - (int)productPrice));
-					System.out.println("You've entered an invalid tender amount.\nTerminating Program.");
-		} 
-		else if (productPrice > 0 && productPrice < 20 && productPrice - (int)productPrice < 0.09f) {		
+		}   
+		else if (productPrice > 0 && productPrice < 20) { 		
 			System.out.print("Enter the amount of money you are tendering >> ");
-			amountTendered = kb.nextFloat();
+			amountTendered = kb.nextDouble();
 		}
 		
 		change = amountTendered - productPrice;
@@ -124,7 +119,7 @@ public class MakeChangeProgram {
 			}
 			// Determine number of 0.25s to be returned; determine appropriate string output
 			if (change > 0 && change >= 0.25f) {
-				float numQrts = change / 0.25f;
+				double numQrts = change / 0.25f;
 				change = change - (int) numQrts * 0.25f;
 	
 				// Round up if near the next denomination increment
@@ -146,7 +141,7 @@ public class MakeChangeProgram {
 			}
 			// Determine number of 0.10s to be returned; determine appropriate string output
 			if (change > 0 && change >= 0.10f) {
-				float numDimes = change / 0.10f;
+				double numDimes = change / 0.10f;
 				change = change - (int)numDimes * 0.10f;
 	
 				// Round up if near the next denomination increment
@@ -168,7 +163,7 @@ public class MakeChangeProgram {
 			}
 			// Determine number of 0.05s to be returned; determine appropriate string output
 			if (change > 0 && change >= 0.05f) {
-				float numNickels = change / 0.05f;
+				double numNickels = change / 0.05f;
 				change = change - (int)numNickels * 0.05f;
 	
 				// Round up if near the next denomination increment
@@ -190,7 +185,7 @@ public class MakeChangeProgram {
 			}
 			// Determine number of 0.01s to be returned; determine appropriate string output
 			if (change > 0.00f) {
-				float numPen = change / 0.01f;
+				double numPen = change / 0.01f;
 				change = change - (int)numPen * 0.01f;
 				
 				// Round up if near the next denomination increment
@@ -230,13 +225,14 @@ public class MakeChangeProgram {
 //		Complete
 //		
 //		User Story #4
-//		If the amount tendered is more than the cost of the item, display the number of bills and coins that should be given to the customer.
+//		If the amount tendered is more than the cost of the item, display the number of 
+// 		bills and coins that should be given to the customer.
 //		Complete
 		
-	public static float getAmtTendered() {
+	public static double getAmtTendered() {
 		Scanner kb = new Scanner(System.in);
 		System.out.print("Enter the amount of money you are tendering >> ");
-		float amountTendered = kb.nextFloat();
+		double amountTendered = kb.nextDouble();
 		return amountTendered;
 	}
 
