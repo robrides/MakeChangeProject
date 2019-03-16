@@ -65,9 +65,9 @@ public class MakeChangeProgram {
 		if (chgToBeRtnd >= 10) {
 			int num10s = (int)chgToBeRtnd / 10;
 			if (num10s > 1) {
-				moneyReturned = moneyReturned + num10s + " ten dollar bills ";
+				moneyReturned = moneyReturned + num10s + " ten dollar bills";
 			} else {
-				moneyReturned = moneyReturned + num10s + " ten dollar bill ";
+				moneyReturned = moneyReturned + num10s + " ten dollar bill";
 			}
 			tempChg = chgToBeRtnd - num10s * 10;
 		}
@@ -75,9 +75,15 @@ public class MakeChangeProgram {
 			int num5s = (int)tempChg / 5;
 			tempChg = tempChg - num5s * 5;
 			if (num5s > 1) {
-				moneyReturned = moneyReturned + num5s + " five dollar bills ";
+				if ( moneyReturned != "" ) {
+					moneyReturned = moneyReturned + ", ";
+				}
+				moneyReturned = moneyReturned + num5s + " five dollar bills";
 			} else {
-				moneyReturned = moneyReturned + num5s + " five dollar bill ";
+				if ( moneyReturned != "" ) {
+					moneyReturned = moneyReturned + ", ";
+				}
+				moneyReturned = moneyReturned + num5s + " five dollar bill";
 			}
 
 		}
@@ -85,50 +91,85 @@ public class MakeChangeProgram {
 			int num1s = (int)tempChg / 1;
 			tempChg = tempChg - num1s * 1;
 			if (num1s > 1) {
-				moneyReturned = moneyReturned + num1s + " one dollar bills ";
+				if ( moneyReturned != "" ) {
+					moneyReturned = moneyReturned + ", ";
+				}
+				moneyReturned = moneyReturned + num1s + " one dollar bills";
 			} else {
-				moneyReturned = moneyReturned + num1s + " one dollar bill ";
+				if ( moneyReturned != "" ) {
+					moneyReturned = moneyReturned + ", ";
+				}
+				moneyReturned = moneyReturned + num1s + " one dollar bill";
 			}
 		}
 		if (tempChg > 0 && tempChg >= 0.25f) {
 			float numQrts = tempChg / 0.25f;
 			tempChg = tempChg - (int)numQrts * 0.25f;
 			if ((int)numQrts > 1) {
-				moneyReturned = moneyReturned + (int)numQrts + " quarters ";
+				if ( moneyReturned != "" ) {
+					moneyReturned = moneyReturned + ", ";
+				}
+				moneyReturned = moneyReturned + (int)numQrts + " quarters";
 			} else {
+				if ( moneyReturned != "" ) {
+					moneyReturned = moneyReturned + ", ";
+				}
 				moneyReturned = moneyReturned + (int)numQrts + " quarter";
 			}
+			System.out.println("TempChg 0.25 " + tempChg);
 		}
 		if (tempChg > 0 && tempChg >= 0.10f) {
 			float numDimes = tempChg / 0.10f;
 			tempChg = tempChg - (int)numDimes * 0.10f;
 			if ((int)numDimes > 1) {
+				if ( moneyReturned != "" ) {
+					moneyReturned = moneyReturned + ", ";
+				}
 				moneyReturned = moneyReturned + (int)numDimes + " dimes";
 			} else {
+				if ( moneyReturned != "" ) {
+					moneyReturned = moneyReturned + ", ";
+				}
 				moneyReturned = moneyReturned + (int)numDimes + " dime";
 			}
+			System.out.println("TempChg 0.10 " + tempChg);
 		}
 		if (tempChg > 0 && tempChg >= 0.05f) {
 			float numNickels = tempChg / 0.05f;
 			tempChg = tempChg - (int)numNickels * 0.05f;
 			if ((int)numNickels > 1) {
-				moneyReturned = moneyReturned + (int)numNickels + " nickels ";
+				if ( moneyReturned != "" ) {
+					moneyReturned = moneyReturned + ", ";
+				}
+				moneyReturned = moneyReturned + (int)numNickels + " nickels";
 			} else {
-				moneyReturned = moneyReturned + (int)numNickels + " nickel ";
+				if ( moneyReturned != "" ) {
+					moneyReturned = moneyReturned + ", ";
+				}
+				moneyReturned = moneyReturned + (int)numNickels + " nickel";
 			}
+			System.out.println("TempChg 0.05 " + tempChg);
 		}
 		if (tempChg > 0 && tempChg > 0) {
 			float numPen = tempChg / 0.01f;
 			tempChg = tempChg - (int)numPen * 0.01f;
 			if ((int)numPen > 1) {
-				moneyReturned = moneyReturned + (int)numPen + " pennies ";
+				if ( moneyReturned != "" ) {
+					moneyReturned = moneyReturned + ", ";
+				}
+				moneyReturned = moneyReturned + (int)numPen + " pennies";
 			} else {
-				moneyReturned = moneyReturned + (int)numPen + " penny ";
+				if ( moneyReturned != "" ) {
+					moneyReturned = moneyReturned + ", ";
+				}
+				moneyReturned = moneyReturned + (int)numPen + " penny";
 			}
+			
+			System.out.println("TempChg pennies " + tempChg);
 		}
 		
 		System.out.println("TempChg at the end " + tempChg);
-		System.out.println(moneyReturned);
+		System.out.println(moneyReturned + ".");
 
 	}
 
