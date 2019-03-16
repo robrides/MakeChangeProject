@@ -33,8 +33,8 @@ public class MakeChangeProgram {
 
 //		User Story #3
 //		Display an appropriate message if the customer provided too little money or the exact amount.
-		float chgToBeRtnd = amountTendered - productPrice;
-		float tempChg = 0;
+		float change = amountTendered - productPrice;
+		//float change = chgToBeRtnd;
 
 		if (amountTendered < productPrice) {
 			System.out
@@ -49,31 +49,21 @@ public class MakeChangeProgram {
 //		If the amount tendered is more than the cost of the item, display the number of bills and 
 //		coins that should be given to the customer.
 
-//		else {
-//			if (chgToBeRtnd % 10 == 0) {
-//				double quantity10s = chgToBeRtnd / 10;
-//				if (quantity10s - (int)quantity10s == 0) {
-//					moneyReturned = "" + quantity10s;
-//					System.out.println("changeReturned twenties mod int, no coin" + quantity10s);
-//				}
-//				else if (quantity10s > 1) {
-//					moneyReturned = "" + quantity10s;
-//				System.out.println("changed returned more than 1 twenty" + quantity10s);
-//				}
-//			}
-//		}
-		if (chgToBeRtnd >= 10) {
-			int num10s = (int)chgToBeRtnd / 10;
+		// Determine number of 10s to be returned; determine appropriate string output
+		if (change >= 10) {
+			int num10s = (int)change / 10;
 			if (num10s > 1) {
 				moneyReturned = moneyReturned + num10s + " ten dollar bills";
 			} else {
 				moneyReturned = moneyReturned + num10s + " ten dollar bill";
 			}
-			tempChg = chgToBeRtnd - num10s * 10;
+			change = change - num10s * 10;
 		}
-		if (tempChg >= 5) {
-			int num5s = (int)tempChg / 5;
-			tempChg = tempChg - num5s * 5;
+		
+		// Determine number of 5s to be returned; determine appropriate string output
+		if (change >= 5) {
+			int num5s = (int)change / 5;
+			change = change - num5s * 5;
 			if (num5s > 1) {
 				if ( moneyReturned != "" ) {
 					moneyReturned = moneyReturned + ", ";
@@ -85,11 +75,12 @@ public class MakeChangeProgram {
 				}
 				moneyReturned = moneyReturned + num5s + " five dollar bill";
 			}
-
 		}
-		if (tempChg >= 1) {
-			int num1s = (int)tempChg / 1;
-			tempChg = tempChg - num1s * 1;
+		
+		// Determine number of 1s to be returned; determine appropriate string output
+		if (change >= 1) {
+			int num1s = (int)change / 1;
+			change = change - num1s * 1;
 			if (num1s > 1) {
 				if ( moneyReturned != "" ) {
 					moneyReturned = moneyReturned + ", ";
@@ -102,9 +93,15 @@ public class MakeChangeProgram {
 				moneyReturned = moneyReturned + num1s + " one dollar bill";
 			}
 		}
-		if (tempChg > 0 && tempChg >= 0.25f) {
-			float numQrts = tempChg / 0.25f;
-			tempChg = tempChg - (int)numQrts * 0.25f;
+		// Determine number of 0.25s to be returned; determine appropriate string output
+		if (change > 0 && change >= 0.25f) {
+			float numQrts = change / 0.25f;
+			change = change - (int)numQrts * 0.25f;
+			
+			// Round up if near the next denomination increment
+			if (change >= 0.245f) {
+				numQrts += 0.001f;
+			}
 			if ((int)numQrts > 1) {
 				if ( moneyReturned != "" ) {
 					moneyReturned = moneyReturned + ", ";
@@ -116,11 +113,16 @@ public class MakeChangeProgram {
 				}
 				moneyReturned = moneyReturned + (int)numQrts + " quarter";
 			}
-			System.out.println("TempChg 0.25 " + tempChg);
 		}
-		if (tempChg > 0 && tempChg >= 0.10f) {
-			float numDimes = tempChg / 0.10f;
-			tempChg = tempChg - (int)numDimes * 0.10f;
+		// Determine number of 0.10s to be returned; determine appropriate string output
+		if (change > 0 && change >= 0.10f) {
+			float numDimes = change / 0.10f;
+			change = change - (int)numDimes * 0.10f;
+			
+			// Round up if near the next denomination increment
+			if (change >= 0.095f) {
+				numDimes += 0.001f;
+			}
 			if ((int)numDimes > 1) {
 				if ( moneyReturned != "" ) {
 					moneyReturned = moneyReturned + ", ";
@@ -132,11 +134,16 @@ public class MakeChangeProgram {
 				}
 				moneyReturned = moneyReturned + (int)numDimes + " dime";
 			}
-			System.out.println("TempChg 0.10 " + tempChg);
 		}
-		if (tempChg > 0 && tempChg >= 0.05f) {
-			float numNickels = tempChg / 0.05f;
-			tempChg = tempChg - (int)numNickels * 0.05f;
+		// Determine number of 0.05s to be returned; determine appropriate string output
+		if (change > 0 && change >= 0.05f) {
+			float numNickels = change / 0.05f;
+			change = change - (int)numNickels * 0.05f;
+			
+			// Round up if near the next denomination increment
+			if (change >= 0.045f) {
+				numNickels += 0.001f;
+			}
 			if ((int)numNickels > 1) {
 				if ( moneyReturned != "" ) {
 					moneyReturned = moneyReturned + ", ";
@@ -148,27 +155,31 @@ public class MakeChangeProgram {
 				}
 				moneyReturned = moneyReturned + (int)numNickels + " nickel";
 			}
-			System.out.println("TempChg 0.05 " + tempChg);
 		}
-		if (tempChg > 0 && tempChg > 0) {
-			float numPen = tempChg / 0.01f;
-			tempChg = tempChg - (int)numPen * 0.01f;
+		// Determine number of 0.01s to be returned; determine appropriate string output
+		if (change > 0) {
+			float numPen = change / 0.01f;
+			change = change - (int)numPen * 0.01f;
+			
+			// Round up if near the next denomination increment
+			if (change >= 0.005f) {
+				numPen += 0.001f;
+			}
+			else {
+				numPen = 0;
+			}
 			if ((int)numPen > 1) {
 				if ( moneyReturned != "" ) {
 					moneyReturned = moneyReturned + ", ";
 				}
 				moneyReturned = moneyReturned + (int)numPen + " pennies";
-			} else {
+			} else if ((int)numPen == 1){
 				if ( moneyReturned != "" ) {
 					moneyReturned = moneyReturned + ", ";
 				}
 				moneyReturned = moneyReturned + (int)numPen + " penny";
 			}
-			
-			System.out.println("TempChg pennies " + tempChg);
 		}
-		
-		System.out.println("TempChg at the end " + tempChg);
 		System.out.println(moneyReturned + ".");
 
 	}
