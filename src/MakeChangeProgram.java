@@ -10,7 +10,7 @@ public class MakeChangeProgram {
 //		to make the change for the customer. Change should be provided using the largest bill and 
 //		coin denominations as possible. Denominations that are not used should not be displayed.
 
-//	    Limits (Formerly assumptions): 
+//	    Limits: 
 //		1. The item will never be over $20.00 
 //		2. The customer will never tender more than $20.00
 
@@ -35,7 +35,7 @@ public class MakeChangeProgram {
 			System.out.println("Sorry, this program does not calculate items costing $20.00 or more.\nTerminating Program.");
 		}
 		else if (productPrice <= 0) {
-			System.out.println("You've entered an invalid tender ammount.\nTerminating Program.");
+			System.out.println("You've entered an invalid tender amount.\nTerminating Program.");
 		}   
 		else if (productPrice > 0 && productPrice < 20) { 		
 			System.out.print("Enter the amount of money you are tendering >> ");
@@ -228,12 +228,32 @@ public class MakeChangeProgram {
 //		If the amount tendered is more than the cost of the item, display the number of 
 // 		bills and coins that should be given to the customer.
 //		Complete
-		
-	public static double getAmtTendered() {
-		Scanner kb = new Scanner(System.in);
-		System.out.print("Enter the amount of money you are tendering >> ");
-		double amountTendered = kb.nextDouble();
-		return amountTendered;
-	}
-
+//		
+//		Test Cases:
+//		Amount: .67, Tendered: .50, Result: Error message
+//		Passes
+//
+//		Amount: .67, Tendered: 1.00, Result: 1 quarter, 1 nickel, 3 pennies.
+//		Passes
+//	
+//		Amount: .59, Tendered: 1.00, Result: 1 quarter, 1 dime, 1 nickel, 1 penny.
+//		Passes
+//	
+//		Amount: 3.96, Tendered: 20.00, Result: 1 ten dollar bill, 1 five dollar bill, 
+//		1 one dollar bill, 4 pennies.
+//		Passes
+//	
+//		Amount: any amount less than 20.00, Tendered: anything greater than amount: correct 
+//		denominations for correct change.
+//		Passes for test cases:
+//			Amount: 12.33, Tendered: 15.00, Result: 2 one dollar bills, 2 quarters, 
+//			1 dime, 1 nickel, 2 pennies.
+//			Amount: 10.69, Tendered: 10.70, Result: 1 penny.
+//			Amount: -21.00, Result: You've entered an invalid tender amount.
+//			Terminating Program.
+//			Amount: 19.99, Tendered: -20, Result: Sorry, you've not provided enough to 
+//			cover the cost of your item.
+//			Terminating program.
+//			Amount: 0.01, Tendered: 333, Result: 16 twenty dollar bills, 1 ten dollar bill, 
+//			2 one dollar bills, 3 quarters, 2 dimes, 4 pennies.
 }
