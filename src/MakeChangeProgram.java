@@ -55,7 +55,7 @@ public class MakeChangeProgram {
 //		If the amount tendered is more than the cost of the item, display the number of bills and 
 //		coins that should be given to the customer.
 
-		// Determine number of 10s to be returned; determine appropriate string output
+		// Determine number of 20s to be returned; determine appropriate string output
 		if (amountTendered > 0) {
 			if (change >= 20) {
 				int num20s = (int) change / 20;
